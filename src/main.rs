@@ -34,7 +34,7 @@ fn get_weather(city: &str, api_key: &str) -> Result<WeatherResponse, Box<dyn Err
 
     let client = Client::new();
     let resp = client.get(url).send()?.text()?;
-    println!("Raw response: {}", resp);
+    // println!("Raw response: {}", resp);
 
     // Deserialize the JSON response into the WeatherResponse struct
     let weather_resp: WeatherResponse = serde_json::from_str(&resp)?;
