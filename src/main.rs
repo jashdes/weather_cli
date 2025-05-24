@@ -43,7 +43,7 @@ fn get_weather(city: &str, api_key: &str) -> Result<WeatherResponse, Box<dyn Err
 
 fn main() {
     let args = Cli::parse();
-    let api_key = "22e2c75420ca34b5e47e6057a5715164";
+    let api_key = env::var("OPENWEATHER_API_KEY").expect("API key not set in .env file"); 
 
     match get_weather(&args.city, api_key) {
         Ok(weather) => {
