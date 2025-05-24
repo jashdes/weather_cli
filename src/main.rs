@@ -2,6 +2,8 @@ use clap::Parser;
 use reqwest::blocking::Client;
 use serde::Deserialize;
 use std::error::Error;
+use std::env;
+use dotenv::dotenv;
 
 #[derive(Parser)]
 struct Cli{
@@ -42,10 +44,11 @@ fn get_weather(city: &str, api_key: &str) -> Result<WeatherResponse, Box<dyn Err
 }
 
 fn main() {
+    dotenv().ok(); // Load environment variables from .env file
     let args = Cli::parse();
     let api_key = env::var("OPENWEATHER_API_KEY").expect("API key not set in .env file"); 
 
-    match get_weather(&args.city, api_key) {
+    match get_weather(&args.city, &api_key) {
         Ok(weather) => {
             println!("Weather in {}:", args.city);
             println!(
