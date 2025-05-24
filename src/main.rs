@@ -42,7 +42,7 @@ fn main() {
 
     match get_weather(&args.city, api_key) {
         Ok(weather) => {
-            println!("Weather in {}:", api_key)
+            println!("Weather in {}:", api_key);
             println!(
                 "{} - {}, Temp: {}°C, Humidity: {}%",
                 weather.weather[0].main,
