@@ -4,6 +4,7 @@ use serde::Deserialize;
 use std::error::Error;
 use std::env;
 use dotenv::dotenv;
+use colored::*;
 
 #[derive(Parser)]
 struct Cli{
@@ -50,14 +51,15 @@ fn main() {
 
     match get_weather(&args.city, &api_key) {
         Ok(weather) => {
-            println!("Weather in {}:", args.city);
-            println!(
-                "{} - {}, Temp: {}°F, Humidity: {}%",
-                weather.weather[0].main,
-                weather.weather[0].description,
-                weather.main.temp,
-                weather.main.humidity
-            );
+           println!("{}", "Weather CLI 🍷✨".bright_magenta().bold());
+           println!("Weather in {}:", args.city.green().bold());
+           println!(
+                "{} -{}, Temp: {}°F, Humidity: {}%",
+                weather.weather[0].main.yellow(),
+                weather.weather[0].description.cyan(),
+                weather.main.temp.to_string().red().bold(),
+                weather.main.humidity.to_string().blue()
+        );
         }
         Err(e) => eprintln!("Error fetching weather data: {}", e),
     }
