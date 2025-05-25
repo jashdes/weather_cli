@@ -26,6 +26,7 @@ struct Weather {
 #[derive(Deserialize, Debug)]
 struct Main {
     temp: f64,
+    feels_like: f64,
     humidity: u64,
 }
 
@@ -54,10 +55,11 @@ fn main() {
            println!("{}", "Weather CLI 🍷✨".bright_magenta().bold());
            println!("Weather in {}:", args.city.green().bold());
            println!(
-                "{} -{}, Temp: {}°F, Humidity: {}%",
+                "{} -{}, Temp: {}°F (Feels like: {}°F), Humidity: {}%",
                 weather.weather[0].main.yellow(),
                 weather.weather[0].description.cyan(),
                 weather.main.temp.to_string().red().bold(),
+                weather.main.feels_like.to_string().magenta().bold(),
                 weather.main.humidity.to_string().blue()
         );
         }
